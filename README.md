@@ -1,19 +1,26 @@
-TODO
+# PII Identifier
 
-[X] Regexes find PII
-[X] Tab 
-[X] Configuration checks
+**Work on progress, not usable**
+This is a Burp Suite extension that idenfies PII data.
 
-PII
+If you have any PII idea, or feature request please open an Issue.
 
-[X] CPF
-[X] Birthday
-[ ] Full Name
-[ ] Email
-[X] RG
-[ ] Address
-[ ] Phone number
-[ ] SSN 
-[ ] IMEI ?
-[ ] Lat / Long
+# TODO
+
+- [X] Regexes find PII
+- [X] Tab 
+- [X] Configuration checks
+
+### PII
+
+- [X] CPF
+- [X] Birthday
+- [ ] Full Name
+- [ ] Email
+- [X] RG
+- [ ] Address
+- [ ] Phone number
+- [ ] SSN 
+- [ ] IMEI ?
+- [ ] Lat / Long
 
