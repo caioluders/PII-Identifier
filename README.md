@@ -1,5 +1,7 @@
 # PII Identifier
 
+![Screenshot](https://i.imgur.com/jbS1RlI.png)
+
 **Work on progress, not usable**
 
 This is a Burp Suite extension that idenfies PII data.
