@@ -1,4 +1,7 @@
-def cpf_check(data) :
+def check(data) :
+
+	if not isinstance(data, list) :
+		data = [data]
 	
 	maybe_cpfs_parsed = [ c.replace(".","").replace("-","") for c in data ]
 	

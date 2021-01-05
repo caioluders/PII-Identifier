@@ -1,4 +1,7 @@
-def rg_check(data) :
+def check(data) :
+
+	if not isinstance(data, list) :
+		data = [data]
 
 	maybe_rgs_parsed = [ r.replace(".","").replace("-","") for r in data ]
 

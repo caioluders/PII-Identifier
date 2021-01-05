@@ -1,4 +1,4 @@
-import re, unidecode, os, imp, json
+import re, unidecode, os, importlib, json
 from operator import itemgetter
 
 def calculate_distance(data,x,keywords) :
@@ -33,9 +33,10 @@ def load_sensors() :
 		sensors[s["name"].lower()] = s
 
 		if "function_file" in s.keys() :
-			info = imp.find_module(f[:-5],[sensors_folder])
-			p = imp.load_module(location, *info)
-			sensors[s["name"].lower()]["function"] = p # xxx	
+			info = importlib.util.spec_from_file_location( s["name"], os.path.join(sensors_folder,s["function_file"]) )
+			p = importlib.util.module_from_spec(info)
+			info.loader.exec_module(p)
+			sensors[s["name"].lower()]["function"] = p.check	
 
 	return sensors	
 
@@ -43,17 +44,26 @@ def run_sensors(options,data) :
 	sensors = load_sensors()
 	pii = {}
 
+	options = [x.lower() for x in options]
+
+	if "all" in options : 
+		options = sensors.keys()
 
 	for o in options :
-		if o.lower() in sensors.keys() :
+		if o in sensors.keys() :
 			sensor_regex = re.compile(sensors[o]["regex"])
 			data_regexed = re.findall(sensor_regex,data)
 
 			probable = []
 
 			for d in data_regexed :
-				probable.append( calculate_distance(data,d[0],sensors[o]["keywords"] ) )
-			# xxx
+				print(d)
+				if "function" in sensors[o].keys() :
+					f_probable = sensors[o]["function"](d)
+					probable.extend( f_probable )
+				else :
+					probable.append( calculate_distance(data,d[0],sensors[o]["keywords"] ) )
+			
 			pii[o] = probable
 
 	return pii
