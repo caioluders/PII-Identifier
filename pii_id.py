@@ -9,7 +9,8 @@ def calculate_distance(data,x,keywords) :
 		relevant_data = unidecode.unidecode(data[:i_x].lower())
 		i_k = relevant_data.find(k)
 
-		if i_k < 0 : continue
+		if  i_k < 0 : 
+			continue
 
 		i_k += len(k)
 		percent_distance = 100-((i_x-i_k)*100 / len(data))
@@ -57,13 +58,17 @@ def run_sensors(options,data) :
 			probable = []
 
 			for d in data_regexed :
-				print(d)
+				if type(d) == tuple :
+					d = d[0]
+				
 				if "function" in sensors[o].keys() :
 					f_probable = sensors[o]["function"](d)
 					probable.extend( f_probable )
 				else :
-					probable.append( calculate_distance(data,d[0],sensors[o]["keywords"] ) )
-			
-			pii[o] = probable
+					probable_distance = calculate_distance(data,d,sensors[o]["keywords"])
+					if len(probable_distance) > 0 :
+						probable.append( probable_distance )
+			if len(probable) > 0 :	
+				pii[o] = probable
 
 	return pii
