@@ -1,15 +1,26 @@
 import re, unidecode, os, importlib, json
 from operator import itemgetter
 
+
+def findall(p, s):
+	'''Yields all the positions of
+	the pattern p in the string s.'''
+	i = s.find(p)
+	while i != -1:
+		yield i
+		i = s.find(p, i+1)
+
 def calculate_distance(data,x,keywords) :
+	'''Calculate distance between two words on a string,
+	prioritizes nearest find, ignores unicode.'''
 	results = []
 
 	for k in keywords :
 		i_x = data.find(x)
 		relevant_data = unidecode.unidecode(data[:i_x].lower())
-		i_k = relevant_data.find(k)
-
-		if  i_k < 0 : 
+		try :
+			i_k = min([ i for i in findall(k,relevant_data)], key=lambda x:abs(x-i_x))
+		except :
 			continue
 
 		i_k += len(k)
@@ -56,11 +67,9 @@ def run_sensors(options,data) :
 			data_regexed = re.findall(sensor_regex,data)
 
 			probable = []
-
 			for d in data_regexed :
 				if type(d) == tuple :
 					d = d[0]
-				
 				if "function" in sensors[o].keys() :
 					f_probable = sensors[o]["function"](d)
 					probable.extend( f_probable )

@@ -1,0 +1,6 @@
+{
+	"name": "Address",
+	"description" : "Detects Addresses",
+	"regex" : "(?:[A-Z]\\w+\\s){2,}", 
+	"keywords" : ["address","endereco"]
+}

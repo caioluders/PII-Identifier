@@ -2,5 +2,5 @@
 	"name" : "Birthday",
 	"description" : "Detects birthday dates",
 	"regex" : "(\\d{2}(\\.|-|\\/)\\d{2}(\\.|-|\\/)(\\d{4}|\\d{2}))",
-	"keywords" : ["birthday","aniversario","Data de nascimento"]
+	"keywords" : ["birthday","aniversario","data de nascimento"]
 }
