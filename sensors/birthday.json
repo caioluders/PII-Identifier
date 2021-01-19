@@ -1,6 +1,6 @@
 {
 	"name" : "Birthday",
 	"description" : "Detects birthday dates",
-	"regex" : "(\\d{2}(\\.|-|\\/)\\d{2}(\\.|-|\\/)(\\d{4}|\\d{2}))",
-	"keywords" : ["birthday","aniversario","data de nascimento"]
+	"regex" : "(\\d{2}(\\.|-|\\/)\\d{1,}(\\.|-|\\/)(\\d{4}|\\d{2}))",
+	"keywords" : ["birthday","aniversario","data de nascimento","nascimento"]
 }
