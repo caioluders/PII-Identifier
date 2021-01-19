@@ -10,13 +10,13 @@ def findall(p, s):
 		yield i
 		i = s.find(p, i+1)
 
-def calculate_distance(data,x,keywords) :
+def calculate_distance(data,x,keywords,threshold) :
 	'''Calculate distance between two words on a string,
 	prioritizes nearest find, ignores unicode.'''
 	results = []
 
+	i_x = data.find(x)
 	for k in keywords :
-		i_x = data.find(x)
 		relevant_data = unidecode.unidecode(data[:i_x].lower())
 		try :
 			i_k = min([ i for i in findall(k,relevant_data)], key=lambda x:abs(x-i_x))
@@ -24,7 +24,9 @@ def calculate_distance(data,x,keywords) :
 			continue
 
 		i_k += len(k)
-		percent_distance = 100-((i_x-i_k)*100 / len(data))
+		percent_distance = 100-(abs(i_x-i_k)*100 / len(data))
+		if threshold > percent_distance :
+			continue
 		results.append( [ x, k , percent_distance ] )
 
 	return sorted(results, key=itemgetter(2))	
@@ -52,7 +54,7 @@ def load_sensors() :
 
 	return sensors	
 
-def run_sensors(options,data) :
+def run_sensors(options,data,threshold=0.0) :
 	sensors = load_sensors()
 	pii = {}
 
@@ -69,12 +71,12 @@ def run_sensors(options,data) :
 			probable = []
 			for d in data_regexed :
 				if type(d) == tuple :
-					d = d[0]
+					d = ''.join(d)
 				if "function" in sensors[o].keys() :
 					f_probable = sensors[o]["function"](d)
 					probable.extend( f_probable )
 				else :
-					probable_distance = calculate_distance(data,d,sensors[o]["keywords"])
+					probable_distance = calculate_distance(data,d,sensors[o]["keywords"],threshold)
 					if len(probable_distance) > 0 :
 						probable.append( probable_distance )
 			if len(probable) > 0 :	

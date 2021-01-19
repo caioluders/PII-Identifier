@@ -1,6 +1,6 @@
 {
 	"name": "Fullname",
 	"description" : "Detects Full Name",
-	"regex" : "(?:[A-Z]\\w+\\s){2,}", 
+	"regex" : "([A-Z][à-úa-zA-ZÀ-Ú]+\\s)([A-Z][à-úa-zA-ZÀ-Ú]+\\s?){1,}", 
 	"keywords" : ["nome","razao social","fullname"]
 }

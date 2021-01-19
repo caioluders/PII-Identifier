@@ -1,0 +1,6 @@
+{
+	"name": "Phone number",
+	"description" : "Detects phone number",
+	"regex" : "(\\+\\d{1,2}\\s)?\\(\\d{2,3}\\)?[\\s.-](\\d{3,4}[\\s.-]\\d{4,}|\\d{8,10})", 
+	"keywords" : ["phone","phonenumber","telefone","cellphone","celular","contato","contact"]
+}
