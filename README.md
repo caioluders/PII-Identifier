@@ -19,10 +19,10 @@ If you have any PII idea, or feature request please open an Issue.
 - [x] CPF
 - [x] Birthday
 - [x] Full Name
-- [ ] Email
+- [X] Email
 - [x] RG
-- [ ] Address
-- [ ] Phone number
+- [X] Address
+- [X] Phone number
 - [ ] SSN 
 - [ ] IMEI ?
 - [ ] Lat / Long

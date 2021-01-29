@@ -1,7 +1,7 @@
 {
 	"name" : "CPF",
 	"description" : "Detects CPF",
-	"regex" : "\\d{11}|\\d{9}-\\d{2}|\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}",
+	"regex" : "\\D\\d{11}\\D|\\d{9}-\\d{2}|\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}",
 	"keywords" :[],
 	"function_file" : "cpf.py"
 }

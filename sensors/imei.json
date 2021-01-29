@@ -1,6 +1,6 @@
 {
 	"name" : "IMEI",
 	"description" : "Detects IMEIS",
-	"regex" : "([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9_-]+)",
+	"regex" : "\\D\\d{14}\\D|\\d{9}-\\d{2}|\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}",
 	"keywords" : []
 }
