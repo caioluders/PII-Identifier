@@ -1,9 +1,11 @@
+import re
+
 def check(data) :
 
 	if not isinstance(data, list) :
 		data = [data]
 
-	maybe_rgs_parsed = [ r.replace(".","").replace("-","") for r in data ]
+	maybe_rgs_parsed = [ re.sub("[^0-9]","",r) for r in data ]
 
 	true_rgs = []
 

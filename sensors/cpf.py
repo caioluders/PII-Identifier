@@ -1,9 +1,11 @@
+import re
+
 def check(data) :
 
 	if not isinstance(data, list) :
 		data = [data]
 	
-	maybe_cpfs_parsed = [ c.replace(".","").replace("-","") for c in data ]
+	maybe_cpfs_parsed = [ re.sub("[^0-9]","",c) for c in data ]
 	
 	true_cpfs = []
 
