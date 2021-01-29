@@ -67,6 +67,7 @@ def run_sensors(options,data,threshold=0.0) :
 	data_u = unidecode.unidecode(data.lower())
 	for o in options :
 		if o in sensors.keys() :
+			print(sensors[o]["regex"])
 			sensor_regex = re.compile(sensors[o]["regex"])
 			data_regexed = re.findall(sensor_regex,data)
 			probable = []
