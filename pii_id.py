@@ -10,14 +10,15 @@ def findall(p, s):
 		yield i
 		i = s.find(p, i+1)
 
-def calculate_distance(data,x,keywords,threshold) :
+def calculate_distance(data,data_decoded,x,keywords,threshold) :
 	'''Calculate distance between two words on a string,
 	prioritizes nearest find, ignores unicode.'''
 	results = []
 
 	i_x = data.find(x)
+	relevant_data = data_decoded[:i_x]
+
 	for k in keywords :
-		relevant_data = unidecode.unidecode(data[:i_x].lower())
 		try :
 			i_k = min([ i for i in findall(k,relevant_data)], key=lambda x:abs(x-i_x))
 		except :
@@ -63,6 +64,7 @@ def run_sensors(options,data,threshold=0.0) :
 	if "all" in options : 
 		options = sensors.keys()
 
+	data_u = unidecode.unidecode(data.lower())
 	for o in options :
 		if o in sensors.keys() :
 			sensor_regex = re.compile(sensors[o]["regex"])
@@ -76,7 +78,7 @@ def run_sensors(options,data,threshold=0.0) :
 					f_probable = sensors[o]["function"](d)
 					probable.extend( f_probable )
 				else :
-					probable_distance = calculate_distance(data,d,sensors[o]["keywords"],threshold)
+					probable_distance = calculate_distance(data,data_u,d,sensors[o]["keywords"],threshold)
 					if len(probable_distance) > 0 :
 						probable.append( probable_distance )
 			if len(probable) > 0 :	
