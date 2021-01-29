@@ -69,7 +69,6 @@ def run_sensors(options,data,threshold=0.0) :
 		if o in sensors.keys() :
 			sensor_regex = re.compile(sensors[o]["regex"])
 			data_regexed = re.findall(sensor_regex,data)
-
 			probable = []
 			for d in data_regexed :
 				if type(d) == tuple :
@@ -77,6 +76,8 @@ def run_sensors(options,data,threshold=0.0) :
 				if "function" in sensors[o].keys() :
 					f_probable = sensors[o]["function"](d)
 					probable.extend( f_probable )
+				elif len(sensors[o]["keywords"]) == 0 :
+					probable.append( d )
 				else :
 					probable_distance = calculate_distance(data,data_u,d,sensors[o]["keywords"],threshold)
 					if len(probable_distance) > 0 :
